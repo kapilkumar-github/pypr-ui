@@ -1,6 +1,8 @@
+import { ResumeRepositoryProvider } from "@/providers/resume-repository-provider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ResumeServiceProvider } from "@/providers/resume-service-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,7 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <ResumeRepositoryProvider>
+          <ResumeServiceProvider>
+            {children}
+          </ResumeServiceProvider>
+        </ResumeRepositoryProvider>
       </body>
     </html>
   );
