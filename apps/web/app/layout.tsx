@@ -1,34 +1,30 @@
 import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
+
 import QueryProvider from "@/providers/query-provider";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const poppins = Poppins({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
-  title: "Pypr",
-  description: "Build smarter sequences and automate your outreach.",
+  title: "Pypr — Build a resume that stands out",
+  description:
+    "Build a beautiful, professional resume with Pypr.",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <QueryProvider>
-          {children}
-        </QueryProvider>
+      <body className={`${poppins.variable} font-poppins antialiased`}>
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );

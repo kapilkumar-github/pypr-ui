@@ -11,11 +11,11 @@ import { authServiceInstance, authService } from "@/features/auth/services";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-type RegisterFormParams = {
+type SignupFormParams = {
     onLogin: () => void;
 };
 
-const RegisterForm = ({ onLogin }: RegisterFormParams) => {
+const SignupForm = ({ onLogin }: SignupFormParams) => {
     const {
         register,
         handleSubmit,
@@ -31,17 +31,14 @@ const RegisterForm = ({ onLogin }: RegisterFormParams) => {
         },
     });
 
-    const onSubmit = async (
-        values: AuthSchema.SignupFormValues
-    ) => {
+    const onSubmit = async (values: AuthSchema.SignupFormValues) => {
         try {
-            const timezone =
-                Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
             const invitationToken = null;
+
             const emailParts = values.email.split("@");
-            let firstName: any = "";
-            if (emailParts.length > 0) firstName = emailParts[0];
+            const firstName = emailParts[0] ?? "";
 
             const req: authService.RegisterUserRequest = {
                 firstName,
@@ -60,90 +57,138 @@ const RegisterForm = ({ onLogin }: RegisterFormParams) => {
     };
 
     return (
-        <div>
-            <h1 className="max-w-xl text-3xl font-semibold leading-tight tracking-tight text-center">
-                Create Your Account
-            </h1>
+        <div className="relative w-full max-w-md">
+            {/* Ambient glow */}
+            <div className="pointer-events-none absolute -inset-10 -z-10 rounded-full bg-primary/[0.04] blur-3xl" />
 
-            <p className="mt-2 max-w-lg text-sm leading-7 text-muted-foreground">
-                Create your account and start building smarter
-                sequences.
-            </p>
+            {/* Card */}
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-7 shadow-2xl backdrop-blur-xl sm:p-8">
+                {/* Header */}
+                <div className="text-center">
+                    <h1 className="text-3xl font-semibold tracking-[-0.03em] text-zinc-100">
+                        Create your account
+                    </h1>
 
-            <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="my-7"
-            >
-                {/* Email */}
-                <div className="mt-5 space-y-2">
-                    <Label
-                        htmlFor="email"
-                        className="text-xs"
-                    >
-                        Email
-                    </Label>
-
-                    <Input
-                        id="email"
-                        type="email"
-                        placeholder="you@example.com"
-                        {...register("email")}
-                    />
-
-                    {errors.email && (
-                        <p className="text-xs text-destructive">
-                            {errors.email.message}
-                        </p>
-                    )}
+                    <p className="mt-2 text-sm leading-6 text-zinc-400">
+                        Start building a resume that stands out.
+                    </p>
                 </div>
 
-                {/* Password */}
-                <div className="mt-5 space-y-2">
-                    <Label
-                        htmlFor="password"
-                        className="text-xs"
+                {/* Form */}
+                <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
+                    {/* Email */}
+                    <div className="space-y-2">
+                        <Label
+                            htmlFor="email"
+                            className="text-xs font-medium text-zinc-300"
+                        >
+                            Email
+                        </Label>
+
+                        <Input
+                            id="email"
+                            type="email"
+                            placeholder="you@example.com"
+                            {...register("email")}
+                            className="
+                h-11
+                border-white/[0.1]
+                bg-white/[0.04]
+                text-zinc-100
+                placeholder:text-zinc-600
+                focus-visible:border-primary/50
+                focus-visible:ring-primary/20
+              "
+                        />
+
+                        {errors.email && (
+                            <p className="text-xs text-red-400">
+                                {errors.email.message}
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Password */}
+                    <div className="mt-5 space-y-2">
+                        <Label
+                            htmlFor="password"
+                            className="text-xs font-medium text-zinc-300"
+                        >
+                            Password
+                        </Label>
+
+                        <PasswordInput
+                            id="password"
+                            placeholder="Create a password"
+                            {...register("password")}
+                        />
+
+                        {errors.password && (
+                            <p className="text-xs text-red-400">
+                                {errors.password.message}
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Confirm Password */}
+                    <div className="mt-5 space-y-2">
+                        <Label
+                            htmlFor="confirmPassword"
+                            className="text-xs font-medium text-zinc-300"
+                        >
+                            Confirm password
+                        </Label>
+
+                        <PasswordInput
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            {...register("confirmPassword")}
+                        />
+
+                        {errors.confirmPassword && (
+                            <p className="text-xs text-red-400">
+                                {errors.confirmPassword.message}
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Submit */}
+                    <Button
+                        type="submit"
+                        size="lg"
+                        className="
+              mt-6 h-11 w-full bg-white font-medium text-black transition hover:bg-zinc-200
+            "
                     >
-                        Password
-                    </Label>
+                        Create your account
+                        <span className="ml-1">→</span>
+                    </Button>
+                </form>
 
-                    <PasswordInput
-                        id="password"
-                        placeholder="Create a password"
-                        {...register("password")}
-                    />
+                {/* Sign in */}
+                <div className="mt-7 flex items-center justify-center gap-1.5">
+                    <p className="text-xs text-zinc-500">
+                        Already have an account?
+                    </p>
 
-                    {errors.password && (
-                        <p className="text-xs text-destructive">
-                            {errors.password.message}
-                        </p>
-                    )}
+                    <button
+                        type="button"
+                        onClick={onLogin}
+                        className="
+              text-xs font-medium
+              text-zinc-200
+              underline-offset-4
+              transition
+              hover:text-white
+              hover:underline
+            "
+                    >
+                        Sign in
+                    </button>
                 </div>
-
-                {/* Submit */}
-                <Button
-                    type="submit"
-                    className="w-full mt-6"
-                    size="lg"
-                >
-                    Create Account
-                </Button>
-            </form>
-
-            <div className="flex gap-2 items-center justify-center">
-                <p className="text-xs leading-7 text-muted-foreground text-center">
-                    Already have an account?
-                </p>
-
-                <button
-                    type="button"
-                    onClick={onLogin}
-                    className="text-xs font-medium text-primary hover:text-primary/80"
-                >
-                    Login
-                </button>
             </div>
         </div>
     );
 };
 
-export default RegisterForm;
+export default SignupForm;

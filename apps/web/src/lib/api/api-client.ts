@@ -89,4 +89,6 @@ export class AxiosApiClient implements ApiClient {
   }
 }
 
-export default new AxiosApiClient(axios.create({ baseURL: "/api" }));
+export default new AxiosApiClient(
+  axios.create({ baseURL: "http://localhost:8080/api" }),
+);

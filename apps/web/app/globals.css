@@ -6,12 +6,7 @@
 
 :root {
   /* Brand */
-  /* --primary: oklch(0.205 0 0); */
-  --primary: #4F46E5; 
-  /* blue */
-  /* --primary: #FE7F2D; orange */
-  /* --primary: #2A835F; green */
-  /* --primary: #03C988; pink */
+  --primary: #7C3AED;
   --primary-foreground: oklch(0.985 0 0);
   --primary-tint: #F8F9FF;
   --primary-med-tint: #EFF4FF;
@@ -115,7 +110,7 @@ body {
 }
 
 body {
-  font-family: var(--font-geist-sans), sans-serif;
+  font-family: var(--font-poppins), sans-serif;
 }
 
 .dark {
@@ -161,5 +156,27 @@ body {
   }
   html {
     @apply font-sans;
+  }
+}
+
+@keyframes pen-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-30px, 0px, 0);
+  }
+}
+
+.pen-float {
+  animation: pen-float 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pen-float {
+    animation: none;
   }
 }
