@@ -88,3 +88,5 @@ export class AxiosApiClient implements ApiClient {
     return new ApiError("An unexpected API error occurred", 0);
   }
 }
+
+export default new AxiosApiClient(axios.create({ baseURL: "/api" }));

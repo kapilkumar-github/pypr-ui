@@ -23,7 +23,7 @@ interface ResumeRepositoryProviderProps {
 export function ResumeRepositoryProvider({
   children,
 }: ResumeRepositoryProviderProps) {
-  const useIndexedDB = true; // Set to true to use IndexedDB, false to use API
+  const useIndexedDB = false; // Set to true to use IndexedDB, false to use API
   const repository = useMemo(
     () => {
       if (useIndexedDB) {
