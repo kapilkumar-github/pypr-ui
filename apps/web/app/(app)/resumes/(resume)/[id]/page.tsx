@@ -1,12 +1,15 @@
 "use client";
-
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import type { Resume } from "@resume-builder/resume-core";
 
 import { useResumeService } from "@/providers/resume-service-provider";
 
-export default function Home() {
+export default function ResumePage() {
+    const { id } = useParams<{ id: string }>();
+    console.log("Resume ID:", id);
+
     const resumeService = useResumeService();
 
     const [resumes, setResumes] = useState<Resume[]>([]);

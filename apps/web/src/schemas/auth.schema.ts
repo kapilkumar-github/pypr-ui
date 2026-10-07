@@ -15,7 +15,7 @@ export type LoginFormValues = z.infer<typeof loginSchema>;
 
 export const signupSchema = z
   .object({
-    firstName: z.string().min(1, "Firstname is required"),
+    firstName: z.string(),
 
     lastName: z.string(),
 

@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Poppins, JetBrains_Mono } from "next/font/google";
 
 import QueryProvider from "@/providers/query-provider";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("dark", "font-mono", jetbrainsMono.variable)}>
       <body className={`${poppins.variable} font-poppins antialiased`}>
         <QueryProvider>{children}</QueryProvider>
       </body>

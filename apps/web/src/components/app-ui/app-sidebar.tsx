@@ -17,22 +17,13 @@ import {
     SidebarMenuItem,
     SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { AppLogo } from "./app-logo";
 
 const navigation = [
-    {
-        title: "Dashboard",
-        url: "/dashboard",
-        icon: LayoutDashboard,
-    },
     {
         title: "Resumes",
         url: "/resumes",
         icon: FileStack,
-    },
-    {
-        title: "Settings",
-        url: "/settings",
-        icon: Settings,
     },
 ];
 
@@ -46,22 +37,14 @@ export function AppSidebar() {
         <Sidebar
             collapsible="icon"
             variant="sidebar"
-            className="border-r"
+            className="bg-background text-foreground"
         >
             {/* Header */}
-            <div className="flex h-16 items-center px-3">
-                {/* Logo */}
-                <Link
-                    href="/dashboard"
-                    className="flex h-9 items-center rounded-xl text-sm font-bold group-data-[collapsible=icon]:w-9 group-data-[collapsible=icon]:justify-center"
-                >
-                    <span>pypr</span>
-                </Link>
-            </div>
+            <AppLogo className="h-14 w-full" showName={false} href="/resumes" />
 
             {/* Main Navigation */}
             <SidebarContent>
-                <SidebarMenu className="gap-2 px-2">
+                <SidebarMenu className="gap-2 p-2">
                     {navigation.map((item) => (
                         <SidebarMenuItem key={item.title}>
                             <SidebarMenuButton
@@ -84,7 +67,7 @@ export function AppSidebar() {
             <SidebarFooter className="p-2">
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarTrigger className="size-9 rounded-lg" />
+                        {/* <SidebarTrigger className="size-9 rounded-lg" /> */}
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarFooter>
