@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-ui/app-sidebar";
+import ProfileMenu from "@/components/app-ui/profile-menu";
 import {
     SidebarInset,
     SidebarProvider,
@@ -21,18 +22,13 @@ export default function AppLayout({
                         <AppSidebar />
 
                         <SidebarInset>
-                            <header className="flex h-14 shrink-0 items-center border-b px-4">
+                            <header className="flex h-14 shrink-0 items-center px-4">
                                 <div className="ml-auto flex items-center gap-2">
-                                    <button
-                                        type="button"
-                                        className="flex size-9 items-center justify-center rounded-full border bg-muted text-xs font-medium hover:bg-accent"
-                                    >
-                                        K
-                                    </button>
+                                    <ProfileMenu name="Kapil" initial="K" />
                                 </div>
                             </header>
 
-                            <main className="flex-1 p-4 bg-primary-tint">
+                            <main className="flex-1 p-4 bg-primary-tint container mx-auto max-w-7xl">
                                 {children}
                             </main>
                         </SidebarInset>

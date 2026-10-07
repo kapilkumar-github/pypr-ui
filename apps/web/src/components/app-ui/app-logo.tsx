@@ -39,7 +39,7 @@ export function AppLogo({
     const s = sizes[size];
 
     const content = (
-        <div className={`flex items-center gap-2 ${className}`}>
+        <div className={`flex items-center justify-center gap-2 ${className}`}>
             <div
                 className={`flex ${s.mark} shrink-0 items-center justify-center bg-white text-black`}
             >

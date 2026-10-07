@@ -75,7 +75,13 @@ const SignupForm = ({ onLogin }: SignupFormParams) => {
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
+                <form
+                    onSubmit={handleSubmit(
+                        onSubmit,
+                        (errors) => console.log("FORM INVALID:", errors)
+                    )}
+                    className="mt-8"
+                >
                     {/* Email */}
                     <div className="space-y-2">
                         <Label

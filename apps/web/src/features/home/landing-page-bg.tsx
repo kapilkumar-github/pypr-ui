@@ -3,6 +3,7 @@ import { AppLogo } from "@/components/app-ui/app-logo";
 import { LogIn, MoveLeft } from "lucide-react";
 import { DotBackground } from "./dot-background";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function LandingPageBackground() {
     const pathname = usePathname();
@@ -55,21 +56,21 @@ export default function LandingPageBackground() {
 
                 <div className="flex items-center gap-3">
                     {!isAuthPage ?
-                        <a
+                        <Link
                             href="/signin"
                             className="flex items-center gap-2 px-4 py-1 text-sm font-medium transition hover:text-zinc-200 hover:underline hover:underline-offset-4"
                         >
                             <LogIn className="h-4 w-4" />
                             Sign in
-                        </a> :
+                        </Link> :
 
-                        <a
+                        <Link
                             href="/"
                             className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition hover:text-zinc-200 hover:underline hover:underline-offset-4"
                         >
                             <MoveLeft className="h-4 w-4" />
                             home
-                        </a>
+                        </Link>
                     }
                 </div>
             </nav>

@@ -1,6 +1,7 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
 
 import { ApiError } from "./api-error";
+import { axiosClient } from "./axios";
 
 export interface ApiClient {
   get<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
@@ -89,6 +90,4 @@ export class AxiosApiClient implements ApiClient {
   }
 }
 
-export default new AxiosApiClient(
-  axios.create({ baseURL: "http://localhost:8080/api" }),
-);
+export default new AxiosApiClient(axiosClient);
